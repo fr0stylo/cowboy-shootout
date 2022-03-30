@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  redis:
+    image: redis:6.2-alpine
+    ports:
+      - 6379:6379
+  shootout:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - redis
+    environment:
+      - REDIS_CONNECTION_STRING=redis:6379
